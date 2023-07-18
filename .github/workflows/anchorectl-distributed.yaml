@@ -72,7 +72,7 @@ jobs:
             
     - name: Generate SBOM and Push to Anchore
       run: |        
-        anchorectl image add --no-auto-subscribe --wait --from registry --annontation "method=distributed" --dockerfile Dockerfile ${IMAGE}
+        anchorectl image add --no-auto-subscribe --wait --from registry --annontation "method=distributed" --dockerfile Dockerfile --force ${IMAGE}
         
     #- name: Pull Vulnerability List
     #  run: |
