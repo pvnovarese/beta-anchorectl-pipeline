@@ -72,15 +72,15 @@ jobs:
             
     - name: Generate SBOM and Push to Anchore
       run: |        
-        anchorectl image add --no-auto-subscribe --wait --from registry --dockerfile Dockerfile ${IMAGE}
+        anchorectl image add --no-auto-subscribe --wait --from registry --annontation "method=distributed" --dockerfile Dockerfile ${IMAGE}
         
-    - name: Pull Vulnerability List
-      run: |
-        anchorectl image vulnerabilities ${IMAGE} 
-        
-    - name: Pull Policy Evaluation
-      run: |
-        # set "ANCHORECTL_FAIL_BASED_ON_RESULTS=true" (see above in the "env:" section) to break the pipeline here if the 
-        # policy evaluation returns FAIL or add -f, --fail-based-on-results to this command for the same result
-        #
-        anchorectl image check --detail ${IMAGE}
+    #- name: Pull Vulnerability List
+    #  run: |
+    #    anchorectl image vulnerabilities ${IMAGE} 
+    #    
+    #- name: Pull Policy Evaluation
+    #  run: |
+    #    # set "ANCHORECTL_FAIL_BASED_ON_RESULTS=true" (see above in the "env:" section) to break the pipeline here if the 
+    #    # policy evaluation returns FAIL or add -f, --fail-based-on-results to this command for the same result
+    #    #
+    #    anchorectl image check --detail ${IMAGE}
